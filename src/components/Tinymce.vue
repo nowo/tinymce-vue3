@@ -1,7 +1,4 @@
  <template>
-  <p class="tipx">
-    最开始引入tinymce时是这个页面写的，/src/components/Tinymce.vue是基于这里的内容封装分出去的
-  </p>
   <div class="tinymce-boxz">
     <Editor v-model="content" :api-key="apiKey" :init="init" />
   </div>
@@ -9,15 +6,22 @@
 
 <script>
 import Editor from "@tinymce/tinymce-vue";
-import { reactive, ref, toRefs } from "@vue/reactivity";
+import { reactive, ref, toRefs, watchEffect } from "vue";
 
 export default {
-  name: "About",
+  name: "Tinymce",
   components: {
     Editor,
   },
-  setup() {
-    const content = ref("默认文字 hello word");
+  props: {
+    //默认值
+    value: {
+      type: String,
+      default: "",
+    },
+  },
+  setup(props, context) {
+    const content = ref(props.value);
     const tiny = reactive({
       apiKey: "qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc", //https://github.com/tinymce/tinymce-vue/blob/main/src/demo/views/Iframe.vue
       init: {
@@ -46,7 +50,7 @@ export default {
         paste_data_images: true, //图片是否可粘贴
         //此处为图片上传处理函数
         images_upload_handler: (blobInfo, success, failure) => {
-          // 这里用base64的图片形式上传图片,包括多图上传也是
+          // 这里用base64的图片形式上传图片,
           let reader = new FileReader(); //本地预览
           reader.readAsDataURL(blobInfo.blob());
           reader.onloadend = function () {
@@ -69,7 +73,6 @@ export default {
             filetype =
               ".pdf, .txt, .zip, .rar, .7z, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .mp3, .mp4, .jpg, .jpeg, .png, .gif, .ico, .svg";
           }
-
           let inputElem = document.createElement("input"); //创建文件选择
           inputElem.setAttribute("type", "file");
           inputElem.setAttribute("accept", filetype);
@@ -89,7 +92,6 @@ export default {
               let base64 = reader.result.split(",")[1];
               let blobInfo = blobCache.create(id, file, base64);
               blobCache.add(blobInfo);
-              console.log(blobInfo.blobUri());
 
               // call the callback and populate the Title field with the file name
               callback(blobInfo.blobUri(), { title: file.name });
@@ -98,6 +100,12 @@ export default {
         },
       },
     });
+
+    //内容有变化，就更新内容，将值返回给父组件
+    watchEffect(() => {
+      context.emit("update:value", content.value);
+    });
+
     return {
       content,
       ...toRefs(tiny),
@@ -105,6 +113,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .tinymce-boxz > textarea {
   display: none;
@@ -120,3 +129,5 @@ export default {
   max-width: 100%;
 }
 </style>
+
+
