@@ -1,33 +1,26 @@
 {
-  "name": "tinymce-vue3",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "@tinymce/tinymce-vue": "^4.0.5",
-    "core-js": "^3.6.5",
-    "vue": "^3.0.0",
-    "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-vue": "^7.0.0",
-    "prettier": "^2.2.1",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2"
-  }
+    "name": "tinymce-vue3",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc --noEmit && vite build",
+        "serve": "vite preview"
+    },
+    "dependencies": {
+        "@tinymce/tinymce-vue": "^4.0.7",
+        "pinia": "^2.0.17",
+        "tinymce": "^6.1.0",
+        "vue": "^3.2.37",
+        "vue-router": "^4.1.2"
+    },
+    "devDependencies": {
+        "@types/node": "^18.0.6",
+        "@vitejs/plugin-vue": "^3.0.0",
+        "sass": "^1.54.0",
+        "typescript": "^4.6.4",
+        "vite": "^3.0.0",
+        "vue-tsc": "^0.38.4"
+    }
 }
