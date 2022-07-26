@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, toRefs, watchEffect } from "vue";
+import { computed, reactive, ref, toRefs, watchEffect } from "vue";
 import Editor from "@tinymce/tinymce-vue";
 
 const props = defineProps({
@@ -17,7 +17,8 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue'])
 
-const content = ref(props.modelValue);  // 重新定义
+
+
 const tiny = reactive({
     apiKey: "qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc", //https://github.com/tinymce/tinymce-vue/blob/main/src/demo/views/Iframe.vue
     init: {
@@ -98,10 +99,22 @@ const tiny = reactive({
     },
 });
 const { apiKey, init } = toRefs(tiny)
-//内容有变化，就更新内容，将值返回给父组件
-watchEffect(() => {
-    emits("update:modelValue", content.value);
-});
+
+// 使用computed监听数据,就不需要使用watch去监听内容改变
+const content = computed({
+    get() {
+        return props.modelValue
+    },
+    set(value) {
+        emits('update:modelValue', value)
+    }
+})
+
+// const content = ref(props.modelValue);  // 重新定义
+// //内容有变化，就更新内容，将值返回给父组件
+// watchEffect(() => {
+//     emits("update:modelValue", content.value);
+// });
 
 
 </script>

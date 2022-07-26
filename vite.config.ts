@@ -5,7 +5,7 @@ import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig((mode: ConfigEnv) => {
-    console.log(mode);
+    // console.log(mode);
 
     return {
         plugins: [vue()],
