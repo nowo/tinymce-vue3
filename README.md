@@ -6,9 +6,9 @@
 
 代码已上传至github
 
-仓库地址：[https://github.com/mrjimin/tinymce-vue3](https://github.com/mrjimin/tinymce-vue3)
+仓库地址：[https://github.com/cooj/tinymce-vue3](https://github.com/cooj/tinymce-vue3)
 
-Demo：[https://mrjimin.github.io/tinymce-vue3/](https://mrjimin.github.io/tinymce-vue3/)
+Demo：[https://cooj.github.io/tinymce-vue3/](https://cooj.github.io/tinymce-vue3/)
 ## 参考文档
 [tinymce官网及文档：https://www.tiny.cloud/](https://www.tiny.cloud/)
 
